@@ -68,10 +68,10 @@ class InterfazLCD:
     def showMax(self,val1,val2):
         self.lcd.clear()
         self.lcd.set_cursor(0,0)
-        text = 'Max Val: %+7.2lf'@(val1)
+        text = 'Max: ' +str(val1)
         self.lcd.message(text)
         self.lcd.set_cursor(0,1)
-        text = 'Min Val: %+7.2lf'@(val2)
+        text = 'Min: ' +str(val2)
         self.lcd.message(text)
 
     def setTentative(self,maxi,mini):
@@ -81,10 +81,10 @@ class InterfazLCD:
     def showTentative(self):
         self.lcd.clear()
         self.lcd.set_cursor(0,0)
-        text = 'Max Val: %+7.2lf'@(self.maxtentative)
+        text = 'Max: ' +str(self.maxtentative)
         self.lcd.message(text)
         self.lcd.set_cursor(0,1)
-        text = 'Min Val: %+7.2lf'@(self.mintentative)
+        text = 'Min: ' +str((self.mintentative)
         self.lcd.message(text)
 
     def autoupdateThreshold(self):
