@@ -6,7 +6,7 @@ from InterfazLcd import *
 
 wait_time = 1
 
-lcd= LCD()
+lcd= InterfazLCD(1)
 cap = cv2.VideoCapture(0)
 #cap.set(cv2.CV_CAP_PROP_FPS, 60)
 found = False

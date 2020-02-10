@@ -1,8 +1,10 @@
 import Adafruit_CharLCD as LCD
 
-class LCD:
+class InterfazLCD:
     counter = 0
-    def __init__(self):
+    serie = 0
+    def __init__(self,s):
+        serie = s
         # Raspberry Pi pin configuration:
         lcd_rs        = 27  # Note this might need to be changed to 21 for older revision Pi's.
         lcd_en        = 22
@@ -15,24 +17,21 @@ class LCD:
         lcd_columns = 16
         lcd_rows    = 2
         # Initialize the LCD using the pins above.
-        self.lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7, 
-                                lcd_columns, lcd_rows, lcd_backlight)
+        self.lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.clear()
-    def menu(self):
-        return 0
-    
+
     def showCounter(self):
-        lcd.clear()
-        lcd.set_cursor(0,0)
-        lcd.message(' Bottle Counter ')
-        lcd.set_cursor(10-len(str(counter)),1)
-        lcd.message(str(counter))
-        lcd.set_cursor(11,1)
-        lcd.message('Units ')
+        self.lcd.clear()
+        self.lcd.set_cursor(0,0)
+        self.lcd.message(' Bottle Counter ')
+        self.lcd.set_cursor(10-len(str(self.counter)),1)
+        self.lcd.message(str(self.counter))
+        self.lcd.set_cursor(11,1)
+        self.lcd.message('Units ')
 
 
     def addCounter(self):
-        counter = counter + 1
+        self.counter = self.counter + 1
         
 
 # Demo showing the cursor.
