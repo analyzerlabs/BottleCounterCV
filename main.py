@@ -1,16 +1,17 @@
 import numpy as np
 import cv2
 import time
+from InterfazLcd import *
 #import matplotlib.pyplot as plt
 
 wait_time = 1
 
-
-cap = cv2.VideoCapture(1)
+lcd= LCD()
+cap = cv2.VideoCapture(0)
 #cap.set(cv2.CV_CAP_PROP_FPS, 60)
 found = False
 ctr = 0
-#millis = int(round(time.time() * 1000))
+T0 = int(round(time.time() * 1000))
 while(1):
     # update data
     ret,frame = cap.read()
@@ -38,31 +39,38 @@ while(1):
     dobj = np.convolve(obj, [5, -5], 'valid')*5
 
     # drawing
-    retval = cv2.plot.Plot2d_create(dobj)
+    """retval = cv2.plot.Plot2d_create(dobj)
     retval.setMaxY(100)
     retval.setMinY(-100)
-    mplot = retval.render()
+    mplot = retval.render()"""
     # analisis
     t1 = np.max(dobj)
     t2 = np.min(dobj)
     if t1 > 30 or t2<-30:
         found = True
         ctr = 0
-        print(t1)
-        print(t2)
+        """print(t1)
+        print(t2)"""
         
     else:
         ctr = ctr + 1
     if ctr == 8:
         if found: 
-            print("found prr")
+            #print("found prr")
+            lcd.addCounter()
         found = False
         ctr = 0
-    cv2.imshow('line',mplot)
-    cv2.imshow('name',frame)
+    """cv2.imshow('line',mplot)
+    cv2.imshow('name',frame)"""
     #cv2.imshow('ana',img_bn)
     if cv2.waitKey(wait_time) & 0xFF == ord('q'):
         break
-    #millis2 = int(round(time.time() * 1000))
+
+    T1 = int(round(time.time() * 1000))
+    if(T1-T0>=2000):
+        T0 = T1
+        lcd.showCounter()
+        print(lcd.counter)
+
 cap.release()
 cv2.destroyAllWindows()
