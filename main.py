@@ -76,16 +76,17 @@ while(imp.cap.isOpened()):
 
     T1 = int(round(time.time() * 1000))
     # if reset boton is pressed
-    if lcd.button.is_pressed:
+    if lcd.button_r.is_pressed:
         getgradient = True
         gvalues1 = []
         gvalues2 = []
         temp0 = int(round(time.time() * 1000))
-    lcd.button.when_released = lcd.resetCounter()
+    lcd.button_r.when_released = lcd.resetCounter()
     # if getgradient is actived
     if getgradient and (T1-temp0<3000):
         gvalues1.append(t1)
         gvalues2.append(t2)
+        print(t1,t2)
     else:
         if getgradient:
             lcd.showMax(np.max(gvalues1),np.min(gvalues2))
@@ -100,5 +101,5 @@ while(imp.cap.isOpened()):
         lcd.showCounter()
         print(lcd.counter)
 
-cap.release()
+imp.cap.release()
 cv2.destroyAllWindows()

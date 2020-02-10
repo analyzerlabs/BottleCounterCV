@@ -84,7 +84,7 @@ class InterfazLCD:
         text = 'Max: ' +str(self.maxtentative)
         self.lcd.message(text)
         self.lcd.set_cursor(0,1)
-        text = 'Min: ' +str((self.mintentative)
+        text = 'Min: ' +str(self.mintentative)
         self.lcd.message(text)
 
     def autoupdateThreshold(self):
