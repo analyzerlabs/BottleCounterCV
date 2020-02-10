@@ -1,21 +1,25 @@
 import numpy as np
-import cv2
+#import cv2
 import time
 from InterfazLcd import *
+from imageProcessing import *
 #import matplotlib.pyplot as plt
 
 wait_time = 1
 
 lcd= InterfazLCD(1)
-cap = cv2.VideoCapture(0)
-#cap.set(cv2.CV_CAP_PROP_FPS, 60)
+imp = ImgProcessing(0)
 found = False
 ctr = 0
 T0 = int(round(time.time() * 1000))
 minT=-30
 maxT=30
-while(1):
-    # update data
+# used to get value of max gradient
+getgradient = False
+gvalues1 = []
+gvalues2 = []
+while(imp.cap.isOpened()):
+    """# update data
     ret,frame = cap.read()
     img_bn = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     v = img_bn.shape[0]
@@ -41,15 +45,16 @@ while(1):
     dobj = np.convolve(obj, [5, -5], 'valid')*5
 
     # drawing
-    """retval = cv2.plot.Plot2d_create(dobj)
+    retval = cv2.plot.Plot2d_create(dobj)
     retval.setMaxY(100)
     retval.setMinY(-100)
-    mplot = retval.render()"""
+    mplot = retval.render()
     # analisis
     t1 = np.max(dobj)
-    t2 = np.min(dobj)
-    minT,maxT = lcd.get_Threshold()
-    if t1 > 30 or t2<-30:
+    t2 = np.min(dobj)"""
+    t1,t2 = imp.getValue()
+    minT,maxT = lcd.get_threshold()
+    if t1 > maxT or t2 < minT:
         found = True
         ctr = 0
         """print(t1)
@@ -70,6 +75,25 @@ while(1):
         break
 
     T1 = int(round(time.time() * 1000))
+    # if reset boton is pressed
+    if lcd.button.is_pressed:
+        getgradient = True
+        gvalues1 = []
+        gvalues2 = []
+        temp0 = int(round(time.time() * 1000))
+    lcd.button.when_released = lcd.resetCounter()
+    # if getgradient is actived
+    if getgradient and (T1-temp0<3000):
+        gvalues1.append(t1)
+        gvalues2.append(t2)
+    else
+        if getgradient:
+            lcd.showMax(np.max(gvalues1),np.min(gvalues2))
+            lcd.setTentantive(np.max(gvalues1),np.min(gvalues2))
+            T0 = int(round(time.time() * 1000))
+        getgradient = False
+        
+    # update display on lcd
     if(T1-T0>=2000):
         T0 = T1
         lcd.showCounter()

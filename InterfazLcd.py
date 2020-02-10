@@ -1,10 +1,14 @@
 import Adafruit_CharLCD as LCD
+from gpiozero import Button
 
 class InterfazLCD:
     counter = 0
     serie = 0
     minT = -30
     maxT = 30
+    mintentative = -36
+    maxtentative = 36
+    
     def __init__(self,s):
         serie = s
         # Raspberry Pi pin configuration:
@@ -15,27 +19,36 @@ class InterfazLCD:
         lcd_d6        = 5
         lcd_d7        = 11
         lcd_backlight = 4
+        bottom_up     = 14
+        bottom_down   = 15
+        bottom_reset  = 17
+        bottom_enter  = 18
         # Define LCD column and row size for 16x2 LCD.
         lcd_columns = 16
         lcd_rows    = 2
         # Initialize the LCD using the pins above.
         self.lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.clear()
+        # initialize button
+        self.button_u = Button(bottom_up)
+        self.button_d = Button(bottom_down)
+        self.button_r = Button(bottom_reset)
+        self.button_e = Button(bottom_enter)
 
     def showCounter(self):
         self.lcd.clear()
         self.lcd.set_cursor(0,0)
         self.lcd.message(' Bottle Counter ')
-        self.lcd.set_cursor(10-len(str(self.counter)),1)
+        self.lcd.set_cursor(8-len(str(self.counter)),1)
         self.lcd.message(str(self.counter))
-        self.lcd.set_cursor(11,1)
-        self.lcd.message('Units ')
+        self.lcd.set_cursor(9,1)
+        self.lcd.message('Units  ')
 
 
     def addCounter(self):
         self.counter = self.counter + 1
 
-    def get_Threshold(self):
+    def get_threshold(self):
         return (self.minT,self.maxT)
 
     def show_Thershold(self): 
@@ -49,10 +62,39 @@ class InterfazLCD:
         self.lcd.set_cursor(10,1)
         self.lcd.message(str(self.maxT))
 
+    def resetCounter(self):
+        self.counter = 0;
+    
+    def showMax(self,val1,val2):
+        self.lcd.clear()
+        self.lcd.set_cursor(0,0)
+        text = 'Max Val: %+7.2lf'@(val1)
+        self.lcd.message(text)
+        self.lcd.set_cursor(0,1)
+        text = 'Min Val: %+7.2lf'@(val2)
+        self.lcd.message(text)
+
+    def setTentantive(self,maxi,mini):
+        self.maxtentative = maxi
+        self.mintentative = mini
+
+    def showTentative(self):
+        self.lcd.clear()
+        self.lcd.set_cursor(0,0)
+        text = 'Max Val: %+7.2lf'@(self.maxtentative)
+        self.lcd.message(text)
+        self.lcd.set_cursor(0,1)
+        text = 'Min Val: %+7.2lf'@(self.mintentative)
+        self.lcd.message(text)
+
+    def autoupdateThreshold(self):
+        self.minT = self.mintentative*.85
+        self.maxT = self.maxtentative*.85
+
     def menu(self):
         self.lcd.clear()
         self.lcd.set_cursor(0,0)
-        self.lcd.message(' 1.Init 2.Reset ')
+        self.lcd.message(' 1. Initialize ')
         self.lcd.set_cursor(0,1)
         self.lcd.message('maxThr = ')
         
