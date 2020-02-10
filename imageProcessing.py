@@ -22,7 +22,7 @@ class ImgProcessing:
         # getting region
         img_bn = cv2.resize(img_bn,(h,v),interpolation = cv2.INTER_AREA)
         img_bn = cv2.GaussianBlur(img_bn,(5,5),0)
-        img_bn = img_bn[int(factv*v/2):int((2-factv)*v/2),int(facth*h):int((1-facth)*h)]
+        img_bn = img_bn[int(self.factv*v/2):int((2-self.factv)*v/2),int(self.facth*h):int((1-self.facth)*h)]
         obj = np.mean(img_bn, axis=1)
         dobj = np.convolve(obj, [25, -25], 'valid')
 

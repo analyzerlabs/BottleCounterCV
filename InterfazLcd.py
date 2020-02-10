@@ -74,7 +74,7 @@ class InterfazLCD:
         text = 'Min Val: %+7.2lf'@(val2)
         self.lcd.message(text)
 
-    def setTentantive(self,maxi,mini):
+    def setTentative(self,maxi,mini):
         self.maxtentative = maxi
         self.mintentative = mini
 

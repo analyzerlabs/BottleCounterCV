@@ -86,11 +86,12 @@ while(imp.cap.isOpened()):
     if getgradient and (T1-temp0<3000):
         gvalues1.append(t1)
         gvalues2.append(t2)
-    else
+    else:
         if getgradient:
             lcd.showMax(np.max(gvalues1),np.min(gvalues2))
-            lcd.setTentantive(np.max(gvalues1),np.min(gvalues2))
+            lcd.setTentative(np.max(gvalues1),np.min(gvalues2))
             T0 = int(round(time.time() * 1000))
+            lcd.autoupdateThreshold()
         getgradient = False
         
     # update display on lcd
