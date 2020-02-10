@@ -3,6 +3,8 @@ import Adafruit_CharLCD as LCD
 class InterfazLCD:
     counter = 0
     serie = 0
+    minT = -30
+    maxT = 30
     def __init__(self,s):
         serie = s
         # Raspberry Pi pin configuration:
@@ -32,6 +34,10 @@ class InterfazLCD:
 
     def addCounter(self):
         self.counter = self.counter + 1
+
+    def lcd.get_Threshold(self):
+        return (self.minT,self.maxT)
+    
         
 
 # Demo showing the cursor.

@@ -12,6 +12,8 @@ cap = cv2.VideoCapture(0)
 found = False
 ctr = 0
 T0 = int(round(time.time() * 1000))
+minT=-30
+maxT=30
 while(1):
     # update data
     ret,frame = cap.read()
@@ -46,6 +48,7 @@ while(1):
     # analisis
     t1 = np.max(dobj)
     t2 = np.min(dobj)
+    minT,maxT = lcd.get_Threshold()
     if t1 > 30 or t2<-30:
         found = True
         ctr = 0
