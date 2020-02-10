@@ -76,7 +76,7 @@ while(imp.cap.isOpened()):
 
     T1 = int(round(time.time() * 1000))
     # if reset boton is pressed
-    if lcd.button_r.is_pressed:
+    if not lcd.button_r.is_pressed:
         print("entre prr")
         getgradient = True
         gvalues1 = []
