@@ -102,7 +102,7 @@ while(imp.cap.isOpened()):
         getgradient = False
         
     # update display on lcd
-    if(T1-T0>=2000):
+    if(T1-T0>=7000):
         T0 = T1
         lcd.showCounter()
         print(lcd.counter)

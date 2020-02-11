@@ -3,7 +3,7 @@ import cv2
 
 class ImgProcessing:
     factv = 0.4
-    facth = 0.2
+    facth = 0
     def __init__(self,cam):
         self.cap = cv2.VideoCapture(cam)
     
