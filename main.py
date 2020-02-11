@@ -12,7 +12,8 @@ imp = ImgProcessing(0)
 found = False
 ctr = 0
 T0 = int(round(time.time() * 1000))
-data = np.load("threshold.dat")
+data = np.load(fname = "threshold.dat")
+print (data)
 maxT=data[0]
 minT=data[1]
 # used to get value of max gradient
