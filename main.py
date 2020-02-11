@@ -20,6 +20,7 @@ minT=data[1]
 getgradient = False
 gvalues1 = []
 gvalues2 = []
+firstCalibration = True
 while(imp.cap.isOpened()):
     """# update data
     ret,frame = cap.read()
@@ -78,8 +79,9 @@ while(imp.cap.isOpened()):
 
     T1 = int(round(time.time() * 1000))
     # if reset boton is pressed
-    if lcd.button_r.is_pressed:
+    if lcd.button_r.is_pressed or firstCalibration:
         print("entre prr")
+        firstCalibration = False
         getgradient = True
         gvalues1 = []
         gvalues2 = []
