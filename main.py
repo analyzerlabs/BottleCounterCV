@@ -12,7 +12,7 @@ imp = ImgProcessing(0)
 found = False
 ctr = 0
 T0 = int(round(time.time() * 1000))
-data = np.load(fname = "/home/pi/BottleCounterCV/threshold.dat")
+data = np.loadtxt(fname = "/home/pi/BottleCounterCV/threshold.dat")
 print (data)
 maxT=data[0]
 minT=data[1]
