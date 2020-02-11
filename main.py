@@ -12,8 +12,9 @@ imp = ImgProcessing(0)
 found = False
 ctr = 0
 T0 = int(round(time.time() * 1000))
-minT=-30
-maxT=30
+data = np.load("threshold.dat")
+maxT=data[0]
+minT=data[1]
 # used to get value of max gradient
 getgradient = False
 gvalues1 = []
@@ -76,15 +77,15 @@ while(imp.cap.isOpened()):
 
     T1 = int(round(time.time() * 1000))
     # if reset boton is pressed
-    if not lcd.button_r.is_pressed:
+    if lcd.button_r.is_pressed:
         print("entre prr")
         getgradient = True
         gvalues1 = []
         gvalues2 = []
         temp0 = int(round(time.time() * 1000))
-    lcd.button_r.when_released = lcd.resetCounter()
+        #lcd.button_r.when_released = lcd.resetCounter()
     # if getgradient is actived
-    if getgradient and (T1-temp0<3000):
+    if getgradient and (T1-temp0<5000):
         gvalues1.append(t1)
         gvalues2.append(t2)
         print(t1,t2)
