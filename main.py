@@ -85,7 +85,7 @@ while(imp.cap.isOpened()):
         temp0 = int(round(time.time() * 1000))
         #lcd.button_r.when_released = lcd.resetCounter()
     # if getgradient is actived
-    if getgradient and (T1-temp0<5000):
+    if getgradient and (T1-temp0<10000):
         gvalues1.append(t1)
         gvalues2.append(t2)
         print(t1,t2)
@@ -95,6 +95,7 @@ while(imp.cap.isOpened()):
             lcd.setTentative(np.max(gvalues1),np.min(gvalues2))
             T0 = int(round(time.time() * 1000))
             lcd.autoupdateThreshold()
+            lcd.resetCounter()
         getgradient = False
         
     # update display on lcd
