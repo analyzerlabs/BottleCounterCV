@@ -3,9 +3,13 @@ import numpy as np
 import time
 from InterfazLcd import *
 from imageProcessing import *
+from maquina import *
 #import matplotlib.pyplot as plt
 
-wait_time = 1
+mch = machine()
+mch.init_machine()
+
+"""wait_time = 1
 
 lcd= InterfazLCD(1)
 imp = ImgProcessing(0)
@@ -38,22 +42,22 @@ while(imp.cap.isOpened()):
             lcd.save_data()
         found = False
         ctr = 0
-    """cv2.imshow('line',mplot)
-    cv2.imshow('name',frame)"""
+    cv2.imshow('line',mplot)
+    cv2.imshow('name',frame)
     #cv2.imshow('ana',img_bn)
     if cv2.waitKey(wait_time) & 0xFF == ord('q'):
         break
 
     T1 = int(round(time.time() * 1000))
     # if reset boton is pressed
-    """if lcd.button_r.is_pressed or firstCalibration:
+    if lcd.button_r.is_pressed or firstCalibration:
         print("entre prr")
         firstCalibration = False
         getgradient = True
         gvalues1 = []
         gvalues2 = []
         temp0 = int(round(time.time() * 1000))
-        #lcd.button_r.when_released = lcd.resetCounter()"""
+        #lcd.button_r.when_released = lcd.resetCounter()
     # if getgradient is actived
     if getgradient and (T1-temp0<10000):
         gvalues1.append(t1)
@@ -75,4 +79,5 @@ while(imp.cap.isOpened()):
         print(lcd.counter)
 
 imp.cap.release()
-cv2.destroyAllWindows()
+cv2.destroyAllWindows()"""
+
