@@ -43,11 +43,8 @@ class InterfazLCD:
     def __del__(self):
         GPIO.cleanup()
 
-    def encoder_interrupt(self, channel):
-        print("CLK Pin: ")
-        print(GPIO.input(self.encoder_clock))
-        print("DT Pin: ")
-        print(GPIO.input(self.encoder_data))
+    def encoder_interrupt(self,channel):
+        print("CLK,DT "+str(GPIO.input(self.encoder_clock))+","+str(GPIO.input(self.encoder_data)))
 
     def showCounter(self):
         self.lcd.clear()
