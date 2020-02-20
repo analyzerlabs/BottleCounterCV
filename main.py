@@ -22,46 +22,11 @@ gvalues1 = []
 gvalues2 = []
 firstCalibration = True
 while(imp.cap.isOpened()):
-    """# update data
-    ret,frame = cap.read()
-    img_bn = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    v = img_bn.shape[0]
-    h = img_bn.shape[1]
-    #print(h,v)
-    d1 = int(0.2*v/2)
-    d2 = int(1.8*v/2)
-    w1 = int(0.2*h)
-    w2 = int(0.8*h)
-    cv2.rectangle(frame,(w1,d1),(w2,d2),(0,255,0),1)
-    # getting region
-    img_bn = cv2.resize(img_bn,(int(h/10),int(v/10)),interpolation = cv2.INTER_AREA)
-    img_bn = cv2.GaussianBlur(img_bn,(5,5),0)
-    v = img_bn.shape[0]
-    h = img_bn.shape[1]
-    #print(h,v)
-    d1 = int(0.6*v/2)
-    d2 = int(1.4*v/2)
-    w1 = int(0.2*h)
-    w2 = int(0.8*h)
-    img_bn = img_bn[d1:d2,w1:w2]
-    obj = np.mean(img_bn, axis=1)
-    dobj = np.convolve(obj, [5, -5], 'valid')*5
-
-    # drawing
-    retval = cv2.plot.Plot2d_create(dobj)
-    retval.setMaxY(100)
-    retval.setMinY(-100)
-    mplot = retval.render()
-    # analisis
-    t1 = np.max(dobj)
-    t2 = np.min(dobj)"""
     t1,t2 = imp.getValue()
     minT,maxT = lcd.get_threshold()
     if t1 > maxT or t2 < minT:
         found = True
         ctr = 0
-        """print(t1)
-        print(t2)"""
         
     else:
         ctr = ctr + 1
@@ -107,8 +72,6 @@ while(imp.cap.isOpened()):
         T0 = T1
         lcd.showCounter()
         print(lcd.counter)
-        
-    
 
 imp.cap.release()
 cv2.destroyAllWindows()

@@ -25,7 +25,7 @@ class InterfazLCD:
         lcd_backlight = 4
         self.encoder_data     = 27
         self.encoder_clock   = 22
-        encoder_buttom  = 17
+        self.encoder_buttom  = 17
         #bottom_enter  = 18
         # Define LCD column and row size for 16x2 LCD.
         lcd_columns = 16
@@ -38,6 +38,7 @@ class InterfazLCD:
         GPIO.setup(self.encoder_clock, GPIO.IN, GPIO.PUD_UP)
         GPIO.setup(self.encoder_data, GPIO.IN, GPIO.PUD_UP)
         GPIO.add_event_detect(self.encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt,bouncetime=100)  # add both edge detection on a channel
+        GPIO.add_event_detect(self.encoder_buttom, GPIO.BOTH, callback=self.buttom_interrupt,bouncetime=100)  # add both edge detection on a channel
         #self.button_e = Button(bottom_enter)
 
     def __del__(self):
@@ -45,6 +46,9 @@ class InterfazLCD:
 
     def encoder_interrupt(self,channel):
         print("CLK,DT "+str(GPIO.input(self.encoder_clock))+","+str(GPIO.input(self.encoder_data)))
+    
+    def buttom_interrupt(self,channel):
+        print("Presionado ")
 
     def showCounter(self):
         self.lcd.clear()
