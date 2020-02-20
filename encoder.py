@@ -8,8 +8,8 @@ encoder_buttom  = 17
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-GPIO.setup(encoder_clock, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(encoder_data, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(encoder_clock, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(encoder_data, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.add_event_detect(encoder_clock, GPIO.BOTH, callback=encoder_interrupt)  # add rising edge detection on a channel
 
 def encoder_interrupt():
