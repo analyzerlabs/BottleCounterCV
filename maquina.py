@@ -54,7 +54,7 @@ class maquina:
         print ("Calibration Data: "+str(data))
         maxT=data[0]
         minT=data[1]
-        while(imp.cap.isOpened()):
+        while(self.imp.cap.isOpened()):
             t1,t2 = self.imp.getValue()
             minT,maxT = lcd.get_threshold()
             if t1 > maxT or t2 < minT:
@@ -79,8 +79,8 @@ class maquina:
         t1 = int(round(time.time() * 1000))
         print("Starting Calibration")
         time.sleep(1)
-        while(imp.cap.isOpened() and (t1-t0<10000)):
-            t1,t2 = imp.getValue()
+        while(self.imp.cap.isOpened() and (t1-t0<10000)):
+            t1,t2 = self.imp.getValue()
             gvalues1.append(t1)
             gvalues2.append(t2)
             t1 = int(round(time.time() * 1000))
