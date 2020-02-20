@@ -16,6 +16,7 @@ data = np.loadtxt(fname = "/home/pi/BottleCounterCV/threshold.dat")
 print (data)
 maxT=data[0]
 minT=data[1]
+state = 0   #state 0 main menu
 # used to get value of max gradient
 getgradient = False
 gvalues1 = []
