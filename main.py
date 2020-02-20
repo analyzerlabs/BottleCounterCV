@@ -69,6 +69,7 @@ while(imp.cap.isOpened()):
         if found: 
             #print("found prr")
             lcd.addCounter()
+            lcd.save_data()
         found = False
         ctr = 0
     """cv2.imshow('line',mplot)

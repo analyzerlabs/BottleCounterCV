@@ -1,5 +1,6 @@
 import Adafruit_CharLCD as LCD
 from gpiozero import Button
+from datetime import date
 
 class InterfazLCD:
     counter = 0
@@ -97,7 +98,12 @@ class InterfazLCD:
         self.lcd.message(' 1. Initialize ')
         self.lcd.set_cursor(0,1)
         self.lcd.message('maxThr = ')
-        
+
+    def save_data(self):
+        today = date.today()
+        file = open('data.dat','w+')
+        file.write(today+'\n')
+        file.close()
         
 
 # Demo showing the cursor.
