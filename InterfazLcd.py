@@ -95,7 +95,7 @@ class InterfazLCD:
     def save_data(self):
         today = date.today()
         file = open('data.dat','w+')
-        file.write(today+'\n')
+        file.write(str(today)+'\n')
         file.close()
         
 
