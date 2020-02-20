@@ -1,25 +1,22 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
-
 encoder_data     = 27
 encoder_clock   = 22
 encoder_buttom  = 17
-GPIO.setup(encoder_data, GPIO.IN)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+GPIO.setup(encoder_clock, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(encoder_data, pull_up_down=GPIO.PUD_UP)
 GPIO.add_event_detect(encoder_clock, GPIO.BOTH, callback=encoder_interrupt)  # add rising edge detection on a channel
-GPIO.setup(encoder_clock, GPIO.IN)
 
 def encoder_interrupt():
-    print("CLK Pin: ")
-    print(GPIO.input(encoder_clock))
-    print("DT Pin: ")
-    print(GPIO.input(encoder_data))
+    print("CLK,DT "+str(GPIO.input(encoder_clock))+","+str(GPIO.input(encoder_data)))
 
 try:
     while True:
-        print("esperando :v")
         time.sleep(1)
-except:
+finally:
     GPIO.cleanup()
