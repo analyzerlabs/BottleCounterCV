@@ -35,9 +35,9 @@ class InterfazLCD:
         self.lcd.clear()
         # initialize encoder
         #self.button_r = Button(encoder_buttom)
-        GPIO.setup(encoder_clock, GPIO.IN, GPIO.PUD_UP)
-        GPIO.setup(encoder_data, GPIO.IN, GPIO.PUD_UP)
-        GPIO.add_event_detect(encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt)  # add both edge detection on a channel
+        GPIO.setup(self.encoder_clock, GPIO.IN, GPIO.PUD_UP)
+        GPIO.setup(self.encoder_data, GPIO.IN, GPIO.PUD_UP)
+        GPIO.add_event_detect(self.encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt)  # add both edge detection on a channel
         #self.button_e = Button(bottom_enter)
 
     def __del__(self):
