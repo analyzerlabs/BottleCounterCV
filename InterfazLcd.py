@@ -13,7 +13,7 @@ class InterfazLCD:
     
     def __init__(self,s):
         serie = s
-        self.GPIO.setmode(self.GPIO.BOARD)
+        #self.GPIO.setmode(self.GPIO.BOARD)
         self.GPIO.setwarnings(False)
         # Raspberry Pi pin configuration:
         lcd_rs        = 26  # Note this might need to be changed to 21 for older revision Pi's.
