@@ -3,7 +3,7 @@ import numpy as np
 from maquina import *
 #import matplotlib.pyplot as plt
 
-mch = machine()
+mch = maquina()
 print("Maquina iniciada")
 mch.init_machine()
 print("Maquina Finalizada")

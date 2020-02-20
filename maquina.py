@@ -3,7 +3,7 @@ from imageProcessing import *
 import RPi.GPIO as GPIO
 import time
 
-class machine:
+class maquina:
     lcd = InterfazLCD(1)
     imp = ImgProcessing(0)
     encoder_data     = 27
