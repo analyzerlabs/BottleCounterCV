@@ -68,6 +68,7 @@ class maquina:
                     self.lcd.save_data()
                 found = False
                 ctr = 0
+            print(self.lcd.counter)
             if self.cadena == 'p':
                 break
         self.state = 0
