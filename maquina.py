@@ -56,7 +56,7 @@ class maquina:
         minT=data[1]
         while(self.imp.cap.isOpened()):
             t1,t2 = self.imp.getValue()
-            minT,maxT = lcd.get_threshold()
+            minT,maxT = self.lcd.get_threshold()
             if t1 > maxT or t2 < minT:
                 found = True
                 ctr = 0
