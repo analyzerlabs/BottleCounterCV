@@ -104,11 +104,11 @@ class maquina:
 
     def execute(self):
         if self.state == 1:
-            function_1()
+            self.function_1()
         elif self.state == 2:
-            function_2()
+            self.function_2()
         elif self.state == 3:
-            function_3()
+            self.function_3()
         self.init_machine()
         
     def init_machine(self):
