@@ -13,8 +13,8 @@ class InterfazLCD:
     
     def __init__(self,s):
         serie = s
-        #self.GPIO.setmode(self.GPIO.BOARD)
-        self.GPIO.setwarnings(False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         # Raspberry Pi pin configuration:
         lcd_rs        = 26  # Note this might need to be changed to 21 for older revision Pi's.
         lcd_en        = 19
@@ -35,19 +35,19 @@ class InterfazLCD:
         self.lcd.clear()
         # initialize encoder
         #self.button_r = Button(encoder_buttom)
-        self.GPIO.setup(encoder_data, self.GPIO.IN)
-        self.GPIO.add_event_detect(encoder_clock, self.GPIO.BOTH, callback=self.encoder_interrupt)  # add rising edge detection on a channel
-        self.GPIO.setup(encoder_clock, self.GPIO.IN)
+        GPIO.setup(encoder_clock, GPIO.IN, GPIO.PUD_UP)
+        GPIO.setup(encoder_data, GPIO.IN, GPIO.PUD_UP)
+        GPIO.add_event_detect(encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt)  # add both edge detection on a channel
         #self.button_e = Button(bottom_enter)
 
     def __del__(self):
-        self.GPIO.cleanup()
+        GPIO.cleanup()
 
-    def encoder_interrupt(self):
-            print("CLK Pin: ")
-            print(self.GPIO.input(self.encoder_clock))
-            print("DT Pin: ")
-            print(self.GPIO.input(self.encoder_data))
+    def encoder_interrupt(self, channel):
+        print("CLK Pin: ")
+        print(GPIO.input(self.encoder_clock))
+        print("DT Pin: ")
+        print(GPIO.input(self.encoder_data))
 
     def showCounter(self):
         self.lcd.clear()
