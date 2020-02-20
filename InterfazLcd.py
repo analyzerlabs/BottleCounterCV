@@ -1,5 +1,5 @@
 import Adafruit_CharLCD as LCD
-from gpiozero import Button
+#from gpiozero import Button
 from datetime import date
 import RPi.GPIO as GPIO
 
@@ -31,15 +31,16 @@ class InterfazLCD:
         # Define LCD column and row size for 16x2 LCD.
         lcd_columns = 16
         lcd_rows    = 2
-        # Initialize the LCD using the pins above.
-        self.lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,lcd_columns, lcd_rows, lcd_backlight)
-        self.lcd.clear()
         # initialize encoder
-        self.button_r = Button(encoder_buttom)
+        #self.button_r = Button(encoder_buttom)
         GPIO.setup(encoder_data, GPIO.IN)
         GPIO.add_event_detect(encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt)  # add rising edge detection on a channel
         GPIO.setup(encoder_clock, GPIO.IN)
         #self.button_e = Button(bottom_enter)
+        # Initialize the LCD using the pins above.
+        self.lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,lcd_columns, lcd_rows, lcd_backlight)
+        self.lcd.clear()
+        
 
     def __del__(self):
         GPIO.cleanup()
