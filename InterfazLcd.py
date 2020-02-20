@@ -1,6 +1,7 @@
 import Adafruit_CharLCD as LCD
 #from gpiozero import Button
 from datetime import date
+import datetime
 
 class InterfazLCD:
     counter = 0
@@ -93,9 +94,9 @@ class InterfazLCD:
         self.lcd.message('maxThr = ')
 
     def save_data(self):
-        today = date.today()
-        file = open('/home/pi/BottleCounterCV/data.dat','w+')
-        file.write(str(today)+'\n')
+        now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+        file = open('/home/pi/BottleCounterCV/data.dat','a+')
+        file.write(str(now)+'\n')
         file.close()
         
 
