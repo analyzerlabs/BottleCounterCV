@@ -1,7 +1,6 @@
 import Adafruit_CharLCD as LCD
 #from gpiozero import Button
 from datetime import date
-import RPi.GPIO as GPIO
 
 class InterfazLCD:
     counter = 0
@@ -13,8 +12,6 @@ class InterfazLCD:
     
     def __init__(self,s):
         serie = s
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setwarnings(False)
         # Raspberry Pi pin configuration:
         lcd_rs        = 26  # Note this might need to be changed to 21 for older revision Pi's.
         lcd_en        = 19
@@ -23,9 +20,6 @@ class InterfazLCD:
         lcd_d6        = 5
         lcd_d7        = 11
         lcd_backlight = 4
-        self.encoder_data     = 27
-        self.encoder_clock   = 22
-        self.encoder_buttom  = 17
         #bottom_enter  = 18
         # Define LCD column and row size for 16x2 LCD.
         lcd_columns = 16
@@ -35,21 +29,6 @@ class InterfazLCD:
         self.lcd.clear()
         # initialize encoder
         #self.button_r = Button(encoder_buttom)
-        GPIO.setup(self.encoder_clock, GPIO.IN, GPIO.PUD_UP)
-        GPIO.setup(self.encoder_data, GPIO.IN, GPIO.PUD_UP)
-        GPIO.setup(self.encoder_buttom, GPIO.IN, GPIO.PUD_UP)
-        GPIO.add_event_detect(self.encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt,bouncetime=100)  # add both edge detection on a channel
-        GPIO.add_event_detect(self.encoder_buttom, GPIO.RISING, callback=self.buttom_interrupt,bouncetime=100)  # add both edge detection on a channel
-        #self.button_e = Button(bottom_enter)
-
-    def __del__(self):
-        GPIO.cleanup()
-
-    def encoder_interrupt(self,channel):
-        print("CLK,DT "+str(GPIO.input(self.encoder_clock))+","+str(GPIO.input(self.encoder_data)))
-    
-    def buttom_interrupt(self,channel):
-        print("Presionado ")
 
     def showCounter(self):
         self.lcd.clear()

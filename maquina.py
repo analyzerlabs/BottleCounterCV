@@ -13,11 +13,16 @@ class machine:
 
     def __init__(self):
         self.state = 0
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         GPIO.setup(self.encoder_clock, GPIO.IN, GPIO.PUD_UP)
         GPIO.setup(self.encoder_data, GPIO.IN, GPIO.PUD_UP)
         GPIO.setup(self.encoder_buttom, GPIO.IN, GPIO.PUD_UP)
         GPIO.add_event_detect(self.encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt,bouncetime=100)  # add both edge detection on a channel
         GPIO.add_event_detect(self.encoder_buttom, GPIO.RISING, callback=self.buttom_interrupt,bouncetime=100)  # add both edge detection on a channel
+    
+    def __del__(self):
+        GPIO.cleanup()
     
     def encoder_interrupt(self,channel):
         self.cadena = str(GPIO.input(self.encoder_clock))+str(GPIO.input(self.encoder_data))
