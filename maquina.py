@@ -12,6 +12,7 @@ class machine:
     cadena = []
 
     def __init__(self):
+        print("Iniciando maquina")
         self.state = 0
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
@@ -62,7 +63,7 @@ class machine:
             else:
                 ctr = ctr + 1
             if ctr == 8:
-                if found: 
+                if found:
                     lcd.addCounter()
                     lcd.save_data()
                 found = False
@@ -111,6 +112,7 @@ class machine:
         init_machine()
         
     def init_machine(self):
+        print("Iniciando Menu")
         print_menu(self.state)
         while(1):
             if self.cadena == '01' or self.cadena == '10':
