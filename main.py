@@ -1,13 +1,9 @@
-import numpy as np
 #import cv2
 from maquina import *
 #import matplotlib.pyplot as plt
 
-print("Creando objetos")
 mch = maquina()
-print("Maquina iniciada")
 mch.init_machine()
-print("Maquina Finalizada")
 """wait_time = 1
 
 lcd= InterfazLCD(1)

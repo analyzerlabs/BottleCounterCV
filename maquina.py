@@ -13,7 +13,6 @@ class maquina:
     cadena = []
 
     def __init__(self):
-        print("Iniciando maquina")
         self.state = 0
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
@@ -56,7 +55,7 @@ class maquina:
         maxT=data[0]
         minT=data[1]
         while(imp.cap.isOpened()):
-            t1,t2 = imp.getValue()
+            t1,t2 = self.imp.getValue()
             minT,maxT = lcd.get_threshold()
             if t1 > maxT or t2 < minT:
                 found = True
@@ -65,8 +64,8 @@ class maquina:
                 ctr = ctr + 1
             if ctr == 8:
                 if found:
-                    lcd.addCounter()
-                    lcd.save_data()
+                    self.lcd.addCounter()
+                    self.lcd.save_data()
                 found = False
                 ctr = 0
             if self.cadena == 'p':
@@ -87,21 +86,21 @@ class maquina:
             t1 = int(round(time.time() * 1000))
         print("Calibrating ...")
         time.sleep(1)
-        lcd.showMax(np.max(gvalues1),np.min(gvalues2))
-        lcd.setTentative(np.max(gvalues1),np.min(gvalues2))
+        self.lcd.showMax(np.max(gvalues1),np.min(gvalues2))
+        self.lcd.setTentative(np.max(gvalues1),np.min(gvalues2))
         T0 = int(round(time.time() * 1000))
         print("Restarting Counting ...")
         time.sleep(1)
-        lcd.autoupdateThreshold()
-        lcd.resetCounter()
-        finish_function()
+        self.lcd.autoupdateThreshold()
+        self.lcd.resetCounter()
+        self.finish_function()
     
     def function_3(self):
         print("Reseting Counting")
         self.lcd.resetCounter()
         time.sleep(1)
         print("Counting has been reseted, please press buttom to continue")
-        finish_function()
+        self.finish_function()
 
     def execute(self):
         if self.state == 1:
@@ -110,11 +109,11 @@ class maquina:
             function_2()
         elif self.state == 3:
             function_3()
-        init_machine()
+        self.init_machine()
         
     def init_machine(self):
         print("Iniciando Menu")
-        print_menu(self.state)
+        self.print_menu(self.state)
         while(1):
             if self.cadena == '01' or self.cadena == '10':
                 self.cadena = 'np'
@@ -122,8 +121,8 @@ class maquina:
             elif self.cadena == '00' or self.cadena == '11':
                 self.cadena = 'np'
                 self.state = (self.state+1)%3+1
-            print_menu(self.state)
+            self.print_menu(self.state)
             if self.cadena == 'p':
                 self.cadena = 'np'
                 break
-        execute()
+        self.execute()
