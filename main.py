@@ -3,6 +3,7 @@ import numpy as np
 from maquina import *
 #import matplotlib.pyplot as plt
 
+print("Creando objetos")
 mch = maquina()
 print("Maquina iniciada")
 mch.init_machine()
