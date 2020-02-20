@@ -1,6 +1,7 @@
 import Adafruit_CharLCD as LCD
 from gpiozero import Button
 from datetime import date
+import RPi.GPIO as GPIO
 
 class InterfazLCD:
     counter = 0
@@ -12,6 +13,8 @@ class InterfazLCD:
     
     def __init__(self,s):
         serie = s
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setwarnings(False)
         # Raspberry Pi pin configuration:
         lcd_rs        = 26  # Note this might need to be changed to 21 for older revision Pi's.
         lcd_en        = 19
@@ -20,21 +23,32 @@ class InterfazLCD:
         lcd_d6        = 5
         lcd_d7        = 11
         lcd_backlight = 4
-        bottom_up     = 14
-        bottom_down   = 15
-        bottom_reset  = 17
-        bottom_enter  = 18
+        self.encoder_data     = 27
+        self.encoder_clock   = 22
+        encoder_buttom  = 17
+        #bottom_enter  = 18
+
         # Define LCD column and row size for 16x2 LCD.
         lcd_columns = 16
         lcd_rows    = 2
         # Initialize the LCD using the pins above.
         self.lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.clear()
-        # initialize button
-        self.button_u = Button(bottom_up)
-        self.button_d = Button(bottom_down)
-        self.button_r = Button(bottom_reset)
-        self.button_e = Button(bottom_enter)
+        # initialize encoder
+        self.button_r = Button(encoder_buttom)
+        GPIO.setup(encoder_data, GPIO.IN)
+        GPIO.add_event_detect(encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt)  # add rising edge detection on a channel
+        GPIO.setup(encoder_clock, GPIO.IN)
+        #self.button_e = Button(bottom_enter)
+
+    def __del__(self):
+        GPIO.cleanup()
+
+    def encoder_interrupt(self):
+            print("CLK Pin: ")
+            print(GPIO.input(self.encoder_clock))
+            print("DT Pin: ")
+            print(GPIO.input(self.encoder_data))
 
     def showCounter(self):
         self.lcd.clear()
@@ -44,7 +58,6 @@ class InterfazLCD:
         self.lcd.message(str(self.counter))
         self.lcd.set_cursor(9,1)
         self.lcd.message('Units  ')
-
 
     def addCounter(self):
         self.counter = self.counter + 1
