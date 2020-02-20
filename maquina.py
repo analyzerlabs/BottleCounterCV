@@ -2,6 +2,7 @@ from InterfazLcd import *
 from imageProcessing import *
 import RPi.GPIO as GPIO
 import time
+import numpy as np
 
 class maquina:
     lcd = InterfazLCD(1)
