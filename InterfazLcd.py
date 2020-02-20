@@ -13,8 +13,8 @@ class InterfazLCD:
     
     def __init__(self,s):
         serie = s
-        GPIO.setmode(GPIO.BOARD)
-        GPIO.setwarnings(False)
+        self.GPIO.setmode(self.GPIO.BOARD)
+        self.GPIO.setwarnings(False)
         # Raspberry Pi pin configuration:
         lcd_rs        = 26  # Note this might need to be changed to 21 for older revision Pi's.
         lcd_en        = 19
@@ -27,29 +27,27 @@ class InterfazLCD:
         self.encoder_clock   = 22
         encoder_buttom  = 17
         #bottom_enter  = 18
-
         # Define LCD column and row size for 16x2 LCD.
         lcd_columns = 16
         lcd_rows    = 2
-        # initialize encoder
-        #self.button_r = Button(encoder_buttom)
-        GPIO.setup(encoder_data, GPIO.IN)
-        GPIO.add_event_detect(encoder_clock, GPIO.BOTH, callback=self.encoder_interrupt)  # add rising edge detection on a channel
-        GPIO.setup(encoder_clock, GPIO.IN)
-        #self.button_e = Button(bottom_enter)
         # Initialize the LCD using the pins above.
         self.lcd = LCD.Adafruit_CharLCD(lcd_rs, lcd_en, lcd_d4, lcd_d5, lcd_d6, lcd_d7,lcd_columns, lcd_rows, lcd_backlight)
         self.lcd.clear()
-        
+        # initialize encoder
+        #self.button_r = Button(encoder_buttom)
+        self.GPIO.setup(encoder_data, self.GPIO.IN)
+        self.GPIO.add_event_detect(encoder_clock, self.GPIO.BOTH, callback=self.encoder_interrupt)  # add rising edge detection on a channel
+        self.GPIO.setup(encoder_clock, self.GPIO.IN)
+        #self.button_e = Button(bottom_enter)
 
     def __del__(self):
-        GPIO.cleanup()
+        self.GPIO.cleanup()
 
     def encoder_interrupt(self):
             print("CLK Pin: ")
-            print(GPIO.input(self.encoder_clock))
+            print(self.GPIO.input(self.encoder_clock))
             print("DT Pin: ")
-            print(GPIO.input(self.encoder_data))
+            print(self.GPIO.input(self.encoder_data))
 
     def showCounter(self):
         self.lcd.clear()
