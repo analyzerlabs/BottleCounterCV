@@ -14,8 +14,8 @@ class InterfazLCD:
     def __init__(self,s):
         serie = s
         # Raspberry Pi pin configuration:
-        lcd_rs        = 14  # Note this might need to be changed to 21 for older revision Pi's.
-        lcd_en        = 15
+        lcd_rs        = 20  # Note this might need to be changed to 21 for older revision Pi's.
+        lcd_en        = 21
         lcd_d4        = 18
         lcd_d5        = 23
         lcd_d6        = 24
