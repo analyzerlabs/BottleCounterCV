@@ -2,6 +2,7 @@ import Adafruit_CharLCD as LCD
 #from gpiozero import Button
 from datetime import date
 import datetime
+import RPi.GPIO as GPIO
 
 class InterfazLCD:
     counter = 0
@@ -12,6 +13,8 @@ class InterfazLCD:
     maxtentative = 36
     
     def __init__(self,s):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         serie = s
         # Raspberry Pi pin configuration:
         lcd_rs        = 20  # Note this might need to be changed to 21 for older revision Pi's.
