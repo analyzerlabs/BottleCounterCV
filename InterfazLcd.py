@@ -77,11 +77,12 @@ class InterfazLCD:
         # DEFINIR GPIO COMO SALIDA PARA USAR LA LCD
         self.GPIO.setmode(self.GPIO.BCM) # USAR LA NOMENCLATURA BCM (HARDWARE)
         self.GPIO.setwarnings(False)
-        self.lcd_init(20,21,18,23,24,25,16,2)
+        self.lcd_init(self.LCD_PLATE_RS,self.LCD_PLATE_EN,self.LCD_PLATE_D4,self.LCD_PLATE_D5,
+        self.LCD_PLATE_D6,self.LCD_PLATE_D7,16,2)
 
         # initialize encoder
         #self.button_r = Button(encoder_buttom)
-    def lcd_init(self, rs, en, d4, d5, d6, d7, cols, lines, backlight=None):
+    def lcd_init(self, rs, en, d4, d5, d6, d7, cols, lines, backlight=None, gpio=GPIO.get_platform_gpio()):
         self._cols = cols
         self._lines = lines
         # Save GPIO state and pin numberS
