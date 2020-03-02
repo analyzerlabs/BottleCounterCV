@@ -3,12 +3,12 @@ from datetime import date
 import datetime
 import RPi.GPIO as GPIO 
 import time
-LCD_RS = 25
-LCD_E = 24
-LCD_D4 = 23
-LCD_D5 = 17
-LCD_D6 = 27
-LCD_D7 = 22
+LCD_RS = 20
+LCD_E = 21
+LCD_D4 = 18
+LCD_D5 = 23
+LCD_D6 = 24
+LCD_D7 = 25
 LED_ON = 15
 
 # Define some device constants
@@ -63,7 +63,7 @@ class InterfazLCD:
         self.lcd_byte(0x06, LCD_CMD)
         self.lcd_byte(0x01, LCD_CMD)
 
-    def message(self, message, style=1,speed=1):
+    def lcd_message(self, message, style=1,speed=1):
         # Auto splits, not perfect for clock
         # Send string to display
         # style=1 Left justified
@@ -101,7 +101,7 @@ class InterfazLCD:
             if message[i] != " ":
                 time.sleep(speed)
 
-    def clear(self):
+    def lcd_clear(self):
         self.lcd_byte(0x06, LCD_CMD)
         self.lcd_byte(0x01, LCD_CMD)
         time.sleep(0.45)
