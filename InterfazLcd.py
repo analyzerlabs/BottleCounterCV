@@ -47,13 +47,13 @@ class InterfazLCD:
     # Offset for up to 4 rows.
     LCD_ROW_OFFSETS         = (0x00, 0x40, 0x14, 0x54)
     # Char LCD plate GPIO numbers.
-    LCD_PLATE_RS            = 15
+    LCD_PLATE_RS            = 20
     LCD_PLATE_RW            = 14
-    LCD_PLATE_EN            = 13
-    LCD_PLATE_D4            = 12
-    LCD_PLATE_D5            = 11
-    LCD_PLATE_D6            = 10
-    LCD_PLATE_D7            = 9
+    LCD_PLATE_EN            = 21
+    LCD_PLATE_D4            = 18
+    LCD_PLATE_D5            = 23
+    LCD_PLATE_D6            = 24
+    LCD_PLATE_D7            = 25
     LCD_PLATE_RED           = 6
     LCD_PLATE_GREEN         = 7
     LCD_PLATE_BLUE          = 8
