@@ -103,6 +103,10 @@ class maquina:
         print("Counting has been reseted, please press buttom to continue")
         self.finish_function()
 
+    def function_4(self):
+        #enviar email
+        self.finish_function()
+
     def execute(self):
         if self.state == 1:
             self.function_1()
@@ -110,6 +114,8 @@ class maquina:
             self.function_2()
         elif self.state == 3:
             self.function_3()
+        elif self.state == 4:
+            self.function_4()
         self.init_machine()
         
     def init_machine(self):
@@ -118,10 +124,10 @@ class maquina:
         while(1):
             if self.cadena == '01' or self.cadena == '10':
                 self.cadena = 'np'
-                self.state = self.state%3+1
+                self.state = self.state%4+1
             elif self.cadena == '00' or self.cadena == '11':
                 self.cadena = 'np'
-                self.state = (self.state+1)%3+1
+                self.state = (self.state+1)%4+1
             self.print_menu(self.state)
             if self.cadena == 'p':
                 self.cadena = 'np'
