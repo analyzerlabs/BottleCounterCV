@@ -171,7 +171,7 @@ class InterfazLCD:
             self.displaymode &= ~self.LCD_ENTRYSHIFTINCREMENT
         self.write8(self.LCD_ENTRYMODESET | self.displaymode)
 
-    def message(self, text):
+    def lcd_message(self, text):
         """Write text to display.  Note that text can include newlines."""
         line = 0
         # Iterate through each character.
