@@ -11,7 +11,6 @@ class InterfazLCD:
     maxT = 30
     mintentative = -36
     maxtentative = 36
-    GPIO.cleanup()
     # DEFINICIONES PARA ASIGNACION DE PINES
     LCD_CLEARDISPLAY        = 0x01
     LCD_RETURNHOME          = 0x02
@@ -76,8 +75,8 @@ class InterfazLCD:
     def __init__(self,s):
         serie = s
         # DEFINIR GPIO COMO SALIDA PARA USAR LA LCD
-        GPIO.setmode(GPIO.BCM) # USAR LA NOMENCLATURA BCM (HARDWARE)
-        GPIO.setwarnings(False)
+        self.GPIO.setmode(self.GPIO.BCM) # USAR LA NOMENCLATURA BCM (HARDWARE)
+        self.GPIO.setwarnings(False)
         self.lcd_init(20,21,18,23,24,25,16,2)
 
         # initialize encoder
@@ -93,7 +92,7 @@ class InterfazLCD:
         self._d6 = d6
         self._d7 = d7
         for pin in (rs, en, d4, d5, d6, d7):
-            GPIO.setup(pin, GPIO.OUT)
+            self.GPIO.setup(pin, self.GPIO.OUT)
          # Initialize the display.
         self.write8(0x33)
         self.write8(0x32)
@@ -194,26 +193,26 @@ class InterfazLCD:
         # One millisecond delay to prevent writing too quickly.
         self._delay_microseconds(1000)
         # Set character / data bit.
-        GPIO.output(self._rs, char_mode)
+        self.GPIO.output(self._rs, char_mode)
         # Write upper 4 bits.
-        GPIO.output(self._d4, ((value >> 4) & 1) > 0)
-        GPIO.output(self._d5, ((value >> 5) & 1) > 0)
-        GPIO.output(self._d6, ((value >> 6) & 1) > 0)
-        GPIO.output(self._d7, ((value >> 7) & 1) > 0)
+        self.GPIO.output(self._d4, ((value >> 4) & 1) > 0)
+        self.GPIO.output(self._d5, ((value >> 5) & 1) > 0)
+        self.GPIO.output(self._d6, ((value >> 6) & 1) > 0)
+        self.GPIO.output(self._d7, ((value >> 7) & 1) > 0)
         self._pulse_enable()
         # Write lower 4 bits.
-        GPIO.output(self._d4, (value        & 1) > 0)
-        GPIO.output(self._d5, ((value >> 1) & 1) > 0)
-        GPIO.output(self._d6, ((value >> 2) & 1) > 0)
-        GPIO.output(self._d7, ((value >> 3) & 1) > 0 )
+        self.GPIO.output(self._d4, (value        & 1) > 0)
+        self.GPIO.output(self._d5, ((value >> 1) & 1) > 0)
+        self.GPIO.output(self._d6, ((value >> 2) & 1) > 0)
+        self.GPIO.output(self._d7, ((value >> 3) & 1) > 0 )
         self._pulse_enable()
     def _pulse_enable(self):
         # Pulse the clock enable line off, on, off to send command.
-        GPIO.output(self._en, False)
+        self.GPIO.output(self._en, False)
         self._delay_microseconds(1)       # 1 microsecond pause - enable pulse must be > 450ns
-        GPIO.output(self._en, True)
+        self.GPIO.output(self._en, True)
         self._delay_microseconds(1)       # 1 microsecond pause - enable pulse must be > 450ns
-        GPIO.output(self._en, False)
+        self.GPIO.output(self._en, False)
         self._delay_microseconds(1)       # commands need > 37us to settle
 
     def create_char(self, location, pattern):
