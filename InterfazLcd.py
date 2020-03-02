@@ -75,7 +75,7 @@ class InterfazLCD:
     def __init__(self,s):
         serie = s
         # DEFINIR GPIO COMO SALIDA PARA USAR LA LCD
-        self.GPIO.setmode(self.GPIO.BCM) # USAR LA NOMENCLATURA BCM (HARDWARE)
+        self.GPIO.setmode(GPIO.BCM) # USAR LA NOMENCLATURA BCM (HARDWARE)
         self.GPIO.setwarnings(False)
         self.lcd_init(20,21,18,23,24,25,16,2)
 
