@@ -194,7 +194,7 @@ class InterfazLCD:
         # One millisecond delay to prevent writing too quickly.
         self._delay_microseconds(1000)
         # Set character / data bit.
-        self._gpio.output(self._rs, char_mode)
+        GPIO.output(self._rs, char_mode)
         # Write upper 4 bits.
         GPIO.output(self._d4, ((value >> 4) & 1) > 0)
         GPIO.output(self._d5, ((value >> 5) & 1) > 0)
@@ -205,7 +205,7 @@ class InterfazLCD:
         GPIO.output(self._d4, (value        & 1) > 0)
         GPIO.output(self._d5, ((value >> 1) & 1) > 0)
         GPIO.output(self._d6, ((value >> 2) & 1) > 0)
-        GPIO.output(self._d7, ((value >> 3) & 1) > 0)
+        GPIO.output(self._d7, ((value >> 3) & 1) > 0 )
         self._pulse_enable()
 
     def create_char(self, location, pattern):
