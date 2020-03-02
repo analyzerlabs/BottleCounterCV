@@ -209,13 +209,13 @@ class InterfazLCD:
         self._pulse_enable()
     def _pulse_enable(self):
         # Pulse the clock enable line off, on, off to send command.
-        self._gpio.output(self._en, False)
+        GPIO.output(self._en, False)
         self._delay_microseconds(1)       # 1 microsecond pause - enable pulse must be > 450ns
-        self._gpio.output(self._en, True)
+        GPIO.output(self._en, True)
         self._delay_microseconds(1)       # 1 microsecond pause - enable pulse must be > 450ns
-        self._gpio.output(self._en, False)
+        GPIO.output(self._en, False)
         self._delay_microseconds(1)       # commands need > 37us to settle
-        
+
     def create_char(self, location, pattern):
         """Fill one of the first 8 CGRAM locations with custom characters.
         The location parameter should be between 0 and 7 and pattern should
