@@ -78,7 +78,7 @@ class InterfazLCD:
         # DEFINIR GPIO COMO SALIDA PARA USAR LA LCD
         GPIO.setmode(GPIO.BCM) # USAR LA NOMENCLATURA BCM (HARDWARE)
         GPIO.setwarnings(False)
-        self.lcd_init(20,21,18,23,24,25)
+        self.lcd_init(20,21,18,23,24,25,16,2)
 
         # initialize encoder
         #self.button_r = Button(encoder_buttom)
