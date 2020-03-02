@@ -14,12 +14,12 @@ class InterfazLCD:
     def __init__(self,s):
         serie = s
         # Raspberry Pi pin configuration:
-        lcd_rs        = 26  # Note this might need to be changed to 21 for older revision Pi's.
-        lcd_en        = 19
-        lcd_d4        = 13
-        lcd_d5        = 6
-        lcd_d6        = 5
-        lcd_d7        = 11
+        lcd_rs        = 14  # Note this might need to be changed to 21 for older revision Pi's.
+        lcd_en        = 15
+        lcd_d4        = 18
+        lcd_d5        = 23
+        lcd_d6        = 24
+        lcd_d7        = 25
         lcd_backlight = 4
         #bottom_enter  = 18
         # Define LCD column and row size for 16x2 LCD.
@@ -83,6 +83,7 @@ class InterfazLCD:
         self.lcd.message(text)
 
     def autoupdateThreshold(self):
+        
         self.minT = self.mintentative*.85
         self.maxT = self.maxtentative*.85
 
