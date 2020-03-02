@@ -71,7 +71,7 @@ class InterfazLCD:
     LCD_BACKPACK_D6         = 5
     LCD_BACKPACK_D7         = 6
     LCD_BACKPACK_LITE       = 7
-    GPIO = gpio
+    GPIO = gpio()
     def __init__(self,s):
         serie = s
         # DEFINIR GPIO COMO SALIDA PARA USAR LA LCD
@@ -82,7 +82,7 @@ class InterfazLCD:
 
         # initialize encoder
         #self.button_r = Button(encoder_buttom)
-    def lcd_init(self, rs, en, d4, d5, d6, d7, cols, lines, backlight=None, gpio=GPIO.get_platform_gpio()):
+    def lcd_init(self, rs, en, d4, d5, d6, d7, cols, lines, backlight=None):
         self._cols = cols
         self._lines = lines
         # Save GPIO state and pin numberS
