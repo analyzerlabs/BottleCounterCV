@@ -1,7 +1,7 @@
 #import Adafruit_CharLCD as LCD
 from datetime import date
 import datetime
-import RPi.GPIO as GPIO 
+import RPi.GPIO as gpio 
 import time
 
 class InterfazLCD:
@@ -71,11 +71,11 @@ class InterfazLCD:
     LCD_BACKPACK_D6         = 5
     LCD_BACKPACK_D7         = 6
     LCD_BACKPACK_LITE       = 7
-
+    GPIO = gpio
     def __init__(self,s):
         serie = s
         # DEFINIR GPIO COMO SALIDA PARA USAR LA LCD
-        self.GPIO.setmode(GPIO.BCM) # USAR LA NOMENCLATURA BCM (HARDWARE)
+        self.GPIO.setmode(self.GPIO.BCM) # USAR LA NOMENCLATURA BCM (HARDWARE)
         self.GPIO.setwarnings(False)
         self.lcd_init(20,21,18,23,24,25,16,2)
 
