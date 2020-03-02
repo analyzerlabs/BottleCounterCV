@@ -71,6 +71,7 @@ class InterfazLCD:
     LCD_BACKPACK_D6         = 5
     LCD_BACKPACK_D7         = 6
     LCD_BACKPACK_LITE       = 7
+    GPIO = GPIO
     def __init__(self,s):
         serie = s
         # DEFINIR GPIO COMO SALIDA PARA USAR LA LCD
