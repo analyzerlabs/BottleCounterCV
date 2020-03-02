@@ -98,13 +98,13 @@ class InterfazLCD:
         self.write8(0x33)
         self.write8(0x32)
         # Initialize display control, function, and mode registers.
-        self.displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF
-        self.displayfunction = LCD_4BITMODE | LCD_1LINE | LCD_2LINE | LCD_5x8DOTS
-        self.displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT
+        self.displaycontrol = self.LCD_DISPLAYON | self.LCD_CURSOROFF | self.LCD_BLINKOFF
+        self.displayfunction = self.LCD_4BITMODE | self.LCD_1LINE | self.LCD_2LINE | self.LCD_5x8DOTS
+        self.displaymode = self.LCD_ENTRYLEFT | self.LCD_ENTRYSHIFTDECREMENT
         # Write registers.
-        self.write8(LCD_DISPLAYCONTROL | self.displaycontrol)
-        self.write8(LCD_FUNCTIONSET | self.displayfunction)
-        self.write8(LCD_ENTRYMODESET | self.displaymode)  # set the entry mode
+        self.write8(self.LCD_DISPLAYCONTROL | self.displaycontrol)
+        self.write8(self.LCD_FUNCTIONSET | self.displayfunction)
+        self.write8(self.LCD_ENTRYMODESET | self.displaymode)  # set the entry mode
         self.lcd_clear()
 
     def lcd_clear(self):
