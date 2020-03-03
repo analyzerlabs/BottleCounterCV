@@ -104,7 +104,25 @@ class InterfazLCD:
         self.lcd.set_cursor(0,1)
         self.lcd.message("      Adios        ")
         time.sleep(0.3)
-        call("sudo shutdown -h now", shell=True)
+        call("sudo poweroff", shell=True)
+
+    def reboot(self):
+        self.lcd.set_cursor(0,0)
+        self.lcd.message(" Reiniciando ....")
+        time.sleep(1)
+        self.lcd.set_cursor(0,1)
+        self.lcd.message("        3        ")
+        time.sleep(1)
+        self.lcd.set_cursor(0,1)
+        self.lcd.message("        2        ")
+        time.sleep(1)
+        self.lcd.set_cursor(0,1)
+        self.lcd.message("        1        ")
+        time.sleep(1)
+        self.lcd.set_cursor(0,1)
+        self.lcd.message("      Adios        ")
+        time.sleep(0.3)
+        call("sudo reboot", shell=True)
 
     def show_menu(self,opcion):
         Lineas = [" ---- MENU ---- ","1.- Iniciar     ","2.- Calibrar    ","3.- Reiniciar   "
