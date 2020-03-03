@@ -37,7 +37,9 @@ class maquina:
             0: "Bottle Counter Menu", 
             1: "Start Counting", 
             2: "Calibrate Counting",
-            3: "Reset Counting", 
+            3: "Reset Counting",
+            4: "PowerOFF",
+            5: "Reboot" 
         }
         print(switcher.get(argument, "Nothing"))
         self.Interfaz.show_menu(argument)
@@ -110,8 +112,14 @@ class maquina:
         print("Apagando Maquina")
         self.Interfaz.shutdown()
 
-        
         self.finish_function()
+
+    def function_5(self):
+        #enviar email
+        print("Apagando Maquina")
+        self.Interfaz.reboot()
+        self.finish_function()
+    
 
     def execute(self):
         if self.state == 1:
@@ -122,6 +130,8 @@ class maquina:
             self.function_3()
         elif self.state == 4:
             self.function_4()
+        elif self.state == 5:
+            self.function_5()    
         self.init_machine()
         
     def init_machine(self):
@@ -131,11 +141,11 @@ class maquina:
         while(1):
             if self.cadena == '01' or self.cadena == '10':
                 self.cadena = 'np'
-                self.state = (self.state+1)%4
+                self.state = (self.state+1)%6
                 self.print_menu(self.state)
             elif self.cadena == '00' or self.cadena == '11':
                 self.cadena = 'np'
-                self.state = (self.state-1)%4
+                self.state = (self.state-1)%6
                 self.print_menu(self.state)
             if self.cadena == 'p':
                 self.cadena = 'np'
