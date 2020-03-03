@@ -126,11 +126,11 @@ class maquina:
         while(1):
             if self.cadena == '01' or self.cadena == '10':
                 self.cadena = 'np'
-                self.state = (self.state-1)%4
+                self.state = (self.state+1)%4
                 self.print_menu(self.state)
             elif self.cadena == '00' or self.cadena == '11':
                 self.cadena = 'np'
-                self.state = (self.state+1)%4
+                self.state = (self.state-1)%4
                 self.print_menu(self.state)
             if self.cadena == 'p':
                 self.cadena = 'np'
