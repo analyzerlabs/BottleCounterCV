@@ -39,6 +39,7 @@ class maquina:
             3: "Reset Counting", 
         }
         print(switcher.get(argument, "Nothing"))
+        lcd.menu()
 
     def finish_function(self):
         while(1):
@@ -120,6 +121,7 @@ class maquina:
         
     def init_machine(self):
         print("Iniciando Menu")
+        time.sleep(2)
         self.print_menu(self.state)
         while(1):
             if self.cadena == '01' or self.cadena == '10':
