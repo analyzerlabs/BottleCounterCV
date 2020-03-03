@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 import time
 import numpy as np
 
+
 class maquina:
     Interfaz = InterfazLCD(1)
     imp = ImgProcessing(0)
@@ -106,6 +107,10 @@ class maquina:
 
     def function_4(self):
         #enviar email
+        print("Apagando Maquina")
+        self.Interfaz.shutdown()
+
+        
         self.finish_function()
 
     def execute(self):

@@ -3,6 +3,7 @@ from datetime import date
 import datetime
 import RPi.GPIO as GPIO 
 import time
+from subprocess import call
 
 lcd_rs        = 20  # Note this might need to be changed to 21 for older revision Pi's.
 lcd_en        = 21
@@ -86,6 +87,24 @@ class InterfazLCD:
         
         self.minT = self.mintentative*.85
         self.maxT = self.maxtentative*.85
+
+    def shutdown(self):
+        self.lcd.set_cursor(0,0)
+        self.lcd.message(" Apagando .....  ")
+        time.sleep(1)
+        self.lcd.set_cursor(0,1)
+        self.lcd.message("        3        ")
+        time.sleep(1)
+        self.lcd.set_cursor(0,1)
+        self.lcd.message("        2        ")
+        time.sleep(1)
+        self.lcd.set_cursor(0,1)
+        self.lcd.message("        1        ")
+        time.sleep(1)
+        self.lcd.set_cursor(0,1)
+        self.lcd.message("      Adios        ")
+        time.sleep(0.3)
+        call("sudo shutdown -h now", shell=True)
 
     def show_menu(self,opcion):
         Lineas = [" ---- MENU ---- ","1.- Iniciar     ","2.- Calibrar    ","3.- Reiniciar   "
