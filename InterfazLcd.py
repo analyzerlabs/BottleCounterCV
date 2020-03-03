@@ -88,8 +88,8 @@ class InterfazLCD:
         self.maxT = self.maxtentative*.85
 
     def show_menu(self,opcion):
-        Lineas = {" ---- MENU ---- ","1.- Iniciar     ","2.- Calibrar    ","3.- Reiniciar   "
-                 ,"4.- Apagar      ","----------------"}
+        Lineas = [" ---- MENU ---- ","1.- Iniciar     ","2.- Calibrar    ","3.- Reiniciar   "
+                 ,"4.- Apagar      ","----------------"]
         print("mostrando Menu")
         self.lcd.clear()
         self.lcd.set_cursor(0,0)
