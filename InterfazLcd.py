@@ -13,6 +13,7 @@ lcd_d7        = 25
 lcd_backlight = 4
 lcd_columns = 16
 lcd_rows = 2
+
 class InterfazLCD:
     counter = 0
     serie = 0
@@ -46,40 +47,40 @@ class InterfazLCD:
         return (self.minT,self.maxT)
 
     def show_Thershold(self): 
-        self.lcd_clear()
-        self.lcd_set_cursor(0,0)
-        self.lcd_message('minThr = ')
-        self.lcd_set_cursor(10,1)
-        self.lcd_message(str(self.minT))
-        self.lcd_set_cursor(0,1)
-        self.lcd_message('maxThr = ')
-        self.lcd_set_cursor(10,1)
-        self.lcd_message(str(self.maxT))
+        self.lcd.clear()
+        self.lcd.set_cursor(0,0)
+        self.lcd.message('minThr = ')
+        self.lcd.set_cursor(10,1)
+        self.lcd.message(str(self.minT))
+        self.lcd.set_cursor(0,1)
+        self.lcd.message('maxThr = ')
+        self.lcd.set_cursor(10,1)
+        self.lcd.message(str(self.maxT))
 
     def resetCounter(self):
         self.counter = 0;
     
     def showMax(self,val1,val2):
-        self.lcd_clear()
-        self.lcd_set_cursor(0,0)
+        self.lcd.clear()
+        self.lcd.set_cursor(0,0)
         text = 'Max: ' +str(val1)
-        self.lcd_message(text)
-        self.lcd_set_cursor(0,1)
+        self.lcd.message(text)
+        self.lcd.set_cursor(0,1)
         text = 'Min: ' +str(val2)
-        self.lcd_message(text)
+        self.lcd.message(text)
 
     def setTentative(self,maxi,mini):
         self.maxtentative = maxi
         self.mintentative = mini
 
     def showTentative(self):
-        self.lcd_clear()
-        self.lcd_set_cursor(0,0)
+        self.lcd.clear()
+        self.lcd.set_cursor(0,0)
         text = 'Max: ' +str(self.maxtentative)
-        self.lcd_message(text)
-        self.lcd_set_cursor(0,1)
+        self.lcd.message(text)
+        self.lcd.set_cursor(0,1)
         text = 'Min: ' +str(self.mintentative)
-        self.lcd_message(text)
+        self.lcd.message(text)
 
     def autoupdateThreshold(self):
         
@@ -87,11 +88,11 @@ class InterfazLCD:
         self.maxT = self.maxtentative*.85
 
     def menu(self):
-        self.lcd_clear()
-        self.lcd_set_cursor(0,0)
-        self.lcd_message(' 1. Initialize ')
-        self.lcd_set_cursor(0,1)
-        self.lcd_message('maxThr = ')
+        self.lcd.clear()
+        self.lcd.set_cursor(0,0)
+        self.lcd.message(' 1. Initialize ')
+        self.lcd.set_cursor(0,1)
+        self.lcd.message('maxThr = ')
 
     def save_data(self):
         now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
