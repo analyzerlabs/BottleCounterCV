@@ -14,8 +14,8 @@ class maquina:
 
     def __init__(self):
         self.state = 0
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setwarnings(False)
+        #GPIO.setmode(GPIO.BCM)
+        #GPIO.setwarnings(False)
         GPIO.setup(self.encoder_clock, GPIO.IN, GPIO.PUD_UP)
         GPIO.setup(self.encoder_data, GPIO.IN, GPIO.PUD_UP)
         GPIO.setup(self.encoder_buttom, GPIO.IN, GPIO.PUD_UP)
