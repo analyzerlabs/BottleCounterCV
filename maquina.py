@@ -39,7 +39,7 @@ class maquina:
             3: "Reset Counting", 
         }
         print(switcher.get(argument, "Nothing"))
-        LCD.menu()
+        LCD.show_menu()
 
     def finish_function(self):
         while(1):
