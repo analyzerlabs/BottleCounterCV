@@ -122,7 +122,6 @@ class maquina:
     def init_machine(self):
         print("Iniciando Menu")
         time.sleep(2)
-        self.print_menu(self.state)
         while(1):
             if self.cadena == '01' or self.cadena == '10':
                 self.cadena = 'np'
