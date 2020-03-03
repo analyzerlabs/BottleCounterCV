@@ -5,7 +5,7 @@ import time
 import numpy as np
 
 class maquina:
-    LCD = InterfazLCD(1)
+    Interfaz = InterfazLCD(1)
     imp = ImgProcessing(0)
     encoder_data     = 27
     encoder_clock   = 22
@@ -39,7 +39,7 @@ class maquina:
             3: "Reset Counting", 
         }
         print(switcher.get(argument, "Nothing"))
-        LCD.show_menu()
+        Interfaz.show_menu()
 
     def finish_function(self):
         while(1):
@@ -57,7 +57,7 @@ class maquina:
         minT=data[1]
         while(self.imp.cap.isOpened()):
             t1,t2 = self.imp.getValue()
-            minT,maxT = self.lcd.get_threshold()
+            minT,maxT = self.Interfaz.get_threshold()
             if t1 > maxT or t2 < minT:
                 found = True
                 ctr = 0
@@ -65,11 +65,11 @@ class maquina:
                 ctr = ctr + 1
             if ctr == 8:
                 if found:
-                    self.LCD.addCounter()
-                    self.LCD.save_data()
+                    self.Interfaz.addCounter()
+                    self.Interfaz.save_data()
                 found = False
                 ctr = 0
-            print(self.LCD.counter)
+            print(self.Interfaz.counter)
             if self.cadena == 'p':
                 break
         self.state = 0
@@ -88,18 +88,18 @@ class maquina:
             t1 = int(round(time.time() * 1000))
         print("Calibrating ...")
         time.sleep(1)
-        self.LCD.showMax(np.max(gvalues1),np.min(gvalues2))
-        self.LCD.setTentative(np.max(gvalues1),np.min(gvalues2))
+        self.Interfaz.showMax(np.max(gvalues1),np.min(gvalues2))
+        self.Interfaz.setTentative(np.max(gvalues1),np.min(gvalues2))
         T0 = int(round(time.time() * 1000))
         print("Restarting Counting ...")
         time.sleep(1)
-        self.LCD.autoupdateThreshold()
-        self.LCD.resetCounter()
+        self.Interfaz.autoupdateThreshold()
+        self.Interfaz.resetCounter()
         self.finish_function()
     
     def function_3(self):
         print("Reseting Counting")
-        self.LCD.resetCounter()
+        self.Interfaz.resetCounter()
         time.sleep(1)
         print("Counting has been reseted, please press buttom to continue")
         self.finish_function()
