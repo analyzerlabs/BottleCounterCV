@@ -87,13 +87,14 @@ class InterfazLCD:
         self.minT = self.mintentative*.85
         self.maxT = self.maxtentative*.85
 
-    def menu(self):
+    def show_menu(self):
+        print("mostrando Menu")
         self.lcd.clear()
         self.lcd.set_cursor(0,0)
         self.lcd.message(' 1. Initialize ')
         self.lcd.set_cursor(0,1)
         self.lcd.message('maxThr = ')
-
+        time.sleep(3)
     def save_data(self):
         now = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
         file = open('/home/pi/BottleCounterCV/data.dat','a+')

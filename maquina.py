@@ -5,7 +5,7 @@ import time
 import numpy as np
 
 class maquina:
-    lcd = InterfazLCD(1)
+    LCD = InterfazLCD(1)
     imp = ImgProcessing(0)
     encoder_data     = 27
     encoder_clock   = 22
@@ -39,7 +39,7 @@ class maquina:
             3: "Reset Counting", 
         }
         print(switcher.get(argument, "Nothing"))
-        lcd.menu()
+        LCD.menu()
 
     def finish_function(self):
         while(1):
@@ -65,11 +65,11 @@ class maquina:
                 ctr = ctr + 1
             if ctr == 8:
                 if found:
-                    self.lcd.addCounter()
-                    self.lcd.save_data()
+                    self.LCD.addCounter()
+                    self.LCD.save_data()
                 found = False
                 ctr = 0
-            print(self.lcd.counter)
+            print(self.LCD.counter)
             if self.cadena == 'p':
                 break
         self.state = 0
@@ -88,18 +88,18 @@ class maquina:
             t1 = int(round(time.time() * 1000))
         print("Calibrating ...")
         time.sleep(1)
-        self.lcd.showMax(np.max(gvalues1),np.min(gvalues2))
-        self.lcd.setTentative(np.max(gvalues1),np.min(gvalues2))
+        self.LCD.showMax(np.max(gvalues1),np.min(gvalues2))
+        self.LCD.setTentative(np.max(gvalues1),np.min(gvalues2))
         T0 = int(round(time.time() * 1000))
         print("Restarting Counting ...")
         time.sleep(1)
-        self.lcd.autoupdateThreshold()
-        self.lcd.resetCounter()
+        self.LCD.autoupdateThreshold()
+        self.LCD.resetCounter()
         self.finish_function()
     
     def function_3(self):
         print("Reseting Counting")
-        self.lcd.resetCounter()
+        self.LCD.resetCounter()
         time.sleep(1)
         print("Counting has been reseted, please press buttom to continue")
         self.finish_function()
