@@ -131,6 +131,8 @@ class InterfazLCD:
         self.lcd.clear()
         self.lcd.set_cursor(0,0)
         self.lcd.message(Lineas[opcion])
+        self.lcd.set_cursor(15,0)
+        self.lcd.message("<")
         self.lcd.set_cursor(0,1)
         self.lcd.message(Lineas[opcion+1])
     
