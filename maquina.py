@@ -142,6 +142,7 @@ class maquina:
             if self.cadena == '01' or self.cadena == '10':
                 self.cadena = 'np'
                 self.state = (self.state+1)%6
+                print("bucle")
                 self.print_menu(self.state)
             elif self.cadena == '00' or self.cadena == '11':
                 self.cadena = 'np'
