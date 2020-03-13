@@ -28,6 +28,7 @@ class InterfazLCD:
         serie = s
         # DEFINIR GPIO COMO SALIDA PARA USAR LA LCD
         GPIO.setwarnings(False)
+        GPIO.setup(lcd_rs,GPIO.out)
 
         # initialize encoder
         #self.button_r = Button(encoder_buttom)
