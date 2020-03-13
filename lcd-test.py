@@ -126,5 +126,4 @@ def lcd_byte(bits, mode):
     GPIO.output(LCD_E, False)
     time.sleep(E_DELAY)
 
-if __name__ == '__main__':
 main()
